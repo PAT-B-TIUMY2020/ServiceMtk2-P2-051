@@ -12,21 +12,34 @@ namespace ServiceMtk2_P2_20180140051
     public interface IMatematika
     {
         [OperationContract]
+        [FaultContract(typeof(MathFault))]
         /* output->*/
         int Tambah(int a, int b); //method         
         [OperationContract]
+        [FaultContract(typeof(MathFault))]
         int Kurang(int a, int b); //input        
         [OperationContract]
+        [FaultContract(typeof(MathFault))]
         int Kali(int a, int b);
         [OperationContract]
+        [FaultContract(typeof(MathFault))]
         int Bagi(int a, int b);
         [OperationContract]
+        [FaultContract(typeof(MathFault))]
         Koordinat TKoordinat(Koordinat a, Koordinat b); //object dari class 
     }
-
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     // You can add XSD files into the project. After building the project, you can directly use the data types defined there, with the namespace "ServiceMtk2_P2_20180140051.ContractType".
+
     [DataContract]
+    class MathFault
+    {
+        [DataMember]
+        public string Kode { get; set; }
+        [DataMember]
+        public string Pesan { get; set; }
+    }
+
     public class Koordinat
     {
         private int _x, _y; //atribut         
